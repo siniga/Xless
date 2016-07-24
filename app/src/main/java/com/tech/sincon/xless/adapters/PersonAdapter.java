@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.tech.sincon.xless.R;
 import com.tech.sincon.xless.activities.SendPaymentActivity;
+import com.tech.sincon.xless.models.Person;
 
 import java.util.Collections;
 import java.util.List;
