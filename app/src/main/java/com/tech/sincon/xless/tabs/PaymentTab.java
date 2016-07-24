@@ -1,11 +1,8 @@
 package com.tech.sincon.xless.tabs;
 
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -15,13 +12,9 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.tech.sincon.xless.R;
 import com.tech.sincon.xless.adapters.PersonAdapter;
-import com.tech.sincon.xless.extras.RecyclerItemClickListener;
-import com.tech.sincon.xless.fragments.DialogReceiverDetails;
-import com.tech.sincon.xless.models.Person;
 
 import java.util.ArrayList;
 import java.util.List;

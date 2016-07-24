@@ -1,10 +1,7 @@
 package com.tech.sincon.xless.adapters;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.v4.app.FragmentManager;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,8 +12,6 @@ import android.widget.TextView;
 
 import com.tech.sincon.xless.R;
 import com.tech.sincon.xless.activities.SendPaymentActivity;
-import com.tech.sincon.xless.models.Person;
-import com.tech.sincon.xless.tabs.PaymentTab;
 
 import java.util.Collections;
 import java.util.List;
