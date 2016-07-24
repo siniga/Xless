@@ -43,14 +43,16 @@
                         android:textColor="@color/colorWhite"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="khams peter" />
+                        android:text="Brandon Robinson" />
 
                     <TextView
                         android:textColor="@color/colorGreyLight"
                         android:layout_gravity="center_vertical"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="0782-344666" />
+                        android:text="255718532531
+
+                        " />
 
 
                 </LinearLayout>
@@ -70,14 +72,14 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:text="Salio la Akaunti yako ya tigo pesa ni shillingi"
+            android:text="The balance on your Tigo Pesa account is"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
         <TextView
-
-            android:layout_marginLeft="10dp"
-            android:text="2394884"
+            android:id="@+id/balance"
+            android:layout_marginLeft="5dp"
+            android:text="250,000"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>
@@ -85,7 +87,7 @@
     <TextView
         android:layout_gravity="center"
         android:textColor="@color/colorGreyMid"
-        android:text="2394884 pata mkompo"
+        android:text=""
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
@@ -95,12 +97,13 @@
         android:padding="30dp">
 
         <Button
+            android:id="@+id/homeButton"
             android:textColor="@color/colorWhite"
             android:background="@color/colorPrimary"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Akaunti Yangu"/>
+            android:text="My account"/>
 
     </LinearLayout>
 </LinearLayout>

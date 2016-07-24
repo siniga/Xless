@@ -12,6 +12,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
+import com.tech.sincon.xless.models.Person;
 
 import com.tech.sincon.xless.R;
 import com.tech.sincon.xless.adapters.PersonAdapter;
@@ -94,8 +95,8 @@ public class PaymentTab extends Fragment{
     public List<Person> setPersonList() {
         List<Person> persons = new ArrayList<>();
 
-        persons.add(new Person("Khamis peter", R.drawable.ic_profile));
-        persons.add(new Person("James Makua", R.drawable.ic_profile));
+        persons.add(new Person("Cathy Martinez", R.drawable.ic_profile));
+        persons.add(new Person("Khamis Peter", R.drawable.ic_profile));
         persons.add(new Person("Fabian Tulip", R.drawable.ic_profile));
         persons.add(new Person("Majani Makalio", R.drawable.ic_profile));
         persons.add(new Person("Moss Deff", R.drawable.ic_profile));
@@ -107,8 +108,6 @@ public class PaymentTab extends Fragment{
         persons.add(new Person("Sifu Master", R.drawable.ic_profile));
         persons.add(new Person("Jeb Jehana", R.drawable.ic_profile));
         persons.add(new Person("Local Lili", R.drawable.ic_profile));
-
-
         return persons;
     }
 
@@ -116,16 +115,13 @@ public class PaymentTab extends Fragment{
     public List<Person> setBusinessList() {
         List<Person> persons = new ArrayList<>();
 
-        persons.add(new Person("Luku", R.drawable.ic_profile));
+        persons.add(new Person("LUKU", R.drawable.ic_profile));
         persons.add(new Person("Dawasco", R.drawable.ic_profile));
         persons.add(new Person("Tango Tv", R.drawable.ic_profile));
-        persons.add(new Person("Dstv", R.drawable.ic_profile));
+        persons.add(new Person("DSTv", R.drawable.ic_profile));
         persons.add(new Person("Azam Tv", R.drawable.ic_profile));
         persons.add(new Person("Raha", R.drawable.ic_profile));
-        persons.add(new Person("Zoku", R.drawable.ic_profile));
-        persons.add(new Person("", R.drawable.ic_profile));
-
-
+        persons.add(new Person("Zuku", R.drawable.ic_profile));
         return persons;
     }
 

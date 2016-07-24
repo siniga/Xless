@@ -20,7 +20,7 @@
 -->
     <EditText
         android:inputType="number"
-        android:hint="Enter Code Number "
+        android:hint="Enter code number "
         android:layout_marginTop="120dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />

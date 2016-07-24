@@ -10,7 +10,7 @@ public class Person {
     int image;
     String name;
 
-    public void Person(int image, String name){
+    public Person(String name, int image){
         this.image = image;
         this.name = name;
     }

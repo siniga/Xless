@@ -7,9 +7,11 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
 
 import com.tech.sincon.xless.R;
 import com.tech.sincon.xless.adapters.ViewPagerAdapter;
@@ -37,9 +39,19 @@ public class MainActivity extends AppCompatActivity {
         tabLayout = (TabLayout) findViewById(R.id.tabLayout);
         tabLayout.setupWithViewPager(viewPager);
 
+        Button button = (Button) findViewById(R.id.homeButton);
+
+
+//        button.setOnClickListener(new OnClickListener() {
+//            public void onClick(View v) {
+//                Log.w("CheckPoint", "Point HA");
+//            }
+//        });
+
         setupTabIcons();
 
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

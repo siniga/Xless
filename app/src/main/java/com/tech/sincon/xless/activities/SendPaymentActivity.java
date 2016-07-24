@@ -1,41 +1,31 @@
 package com.tech.sincon.xless.activities;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
-import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
-import com.tech.sincon.xless.Http.AppHttp;
 import com.tech.sincon.xless.R;
-import com.tech.sincon.xless.api.EndpointApi;
 import com.tech.sincon.xless.extras.ApplicationController;
-import com.tech.sincon.xless.models.Transaction;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.math.BigDecimal;
-import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class SendPaymentActivity extends AppCompatActivity {
     private String name;
@@ -62,18 +52,9 @@ public class SendPaymentActivity extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getParament("http://41.222.176.233:8080/v0.14/MM/transactions");
+                processRequest("http://41.222.176.233:8080/v0.14/MM/transactions/");
             }
         });
-
-
-    }
-
-    private  void sendRequest(String amnt, String pin){
-
-        /*AppHttp appHttp = new AppHttp(this);
-        appHttp.postData("http://41.222.176.233:8080/v0.14/MM/accounts/msisdn/255718532531/balance", getParameters(amnt, pin));*/
-       /* Toast.makeText(this,amnt +" "+pin,Toast.LENGTH_SHORT).show();*/
 
 
     }
@@ -88,40 +69,97 @@ public class SendPaymentActivity extends AppCompatActivity {
 
     }
 
-    public void getParament(String URL) {
 
-        Map<String, String> jsonParams = new HashMap<String, String>();
-        jsonParams.put("amount", "500");
-        jsonParams.put("type", "transfer");
-        jsonParams.put("type", "transfer");
 
+    public void processRequest(String URL) {
+
+        String json = "{ \"amount\": 500, \"type\": \"transfer\", \"debitParty\": [ { \"key\": \"MSISDN\", \"value\": \"255718532546\" } ], \"creditParty\": [ { \"key\": \"MSISDN\", \"value\": \"255718532531\" } ] }";
+        Map<String, Object> jsonParams2 = new HashMap<String, Object>();
+        try {
+            jsonParams2 = jsonString2Map(json);
+        } catch (Exception e) {
+
+        }
+        Log.w("Check point", "Point A");
+        Log.w("Data", jsonParams2.toString());
         JsonObjectRequest myRequest = new JsonObjectRequest(
                 Request.Method.POST,
                 URL,
-                new JSONObject(jsonParams),
+                new JSONObject(jsonParams2),
 
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
                       /*  verificationSuccess(response);*/
+                        Log.w("Response", response.toString());
+                        Log.w("CheckPoint", "Point B");
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                        /* verificationFailed(error);*/
+                        Log.w("CheckPoint", "Point C");
+                        Log.w("Error", error.toString());
                     }
                 }) {
 
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 HashMap<String, String> headers = new HashMap<String, String>();
-                headers.put("Content-Type", "application/json; charset=utf-8");
-                headers.put("uthorization", "Basic MjU1NzE4NTMyNTMxOjAwMDA=");
+                headers.put("Content-Type", "application/json");
+                headers.put("Authorization", "Basic MjU1NzE4NTMzMTAyOjAwMDA=");
                 return headers;
             }
         };
-        ApplicationController.getInstance().addToRequestQueue(myRequest, "tag");
+        myRequest.setRetryPolicy(new DefaultRetryPolicy(5000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        Log.w("CheckPoint", "Point D");
+        ApplicationController.getInstance().addToRequestQueue(myRequest, "Send Payment");
+    }
+
+    public static Map<String, Object> jsonString2Map( String jsonString ) throws JSONException {
+        Map<String, Object> keys = new HashMap<String, Object>();
+
+        org.json.JSONObject jsonObject = new org.json.JSONObject( jsonString ); // HashMap
+        Iterator<?> keyset = jsonObject.keys(); // HM
+
+        while (keyset.hasNext()) {
+            String key =  (String) keyset.next();
+            Object value = jsonObject.get(key);
+            System.out.print("\n Key : "+key);
+            if ( value instanceof org.json.JSONObject ) {
+                System.out.println("Incomin value is of JSONObject : ");
+                keys.put( key, jsonString2Map( value.toString() ));
+            }else if ( value instanceof org.json.JSONArray) {
+                org.json.JSONArray jsonArray = jsonObject.getJSONArray(key);
+                //JSONArray jsonArray = new JSONArray(value.toString());
+                keys.put( key, jsonArray2List( jsonArray ));
+            } else {
+//                keyNode( value);
+                keys.put( key, value );
+            }
+        }
+        return keys;
+    }
+
+    public static List<Object> jsonArray2List(JSONArray arrayOFKeys ) throws JSONException{
+        System.out.println("Incoming value is of JSONArray : =========");
+        List<Object> array2List = new ArrayList<Object>();
+        for ( int i = 0; i < arrayOFKeys.length(); i++ )  {
+            if ( arrayOFKeys.opt(i) instanceof JSONObject ) {
+                Map<String, Object> subObj2Map = jsonString2Map(arrayOFKeys.opt(i).toString());
+                array2List.add(subObj2Map);
+            }else if ( arrayOFKeys.opt(i) instanceof JSONArray ) {
+                List<Object> subarray2List = jsonArray2List((JSONArray) arrayOFKeys.opt(i));
+                array2List.add(subarray2List);
+            }else {
+//                keyNode( arrayOFKeys.opt(i) );
+                array2List.add( arrayOFKeys.opt(i) );
+            }
+        }
+        return array2List;
     }
 
 }
