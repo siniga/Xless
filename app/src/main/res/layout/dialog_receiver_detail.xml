@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="15dp">
+
+    <LinearLayout
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Send Money to "/>
+
+        <TextView
+            android:textColor="@color/colorBlack"
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0723334455"/>
+    </LinearLayout>
+
+
+    <EditText
+        android:id="@+id/amnt"
+        android:inputType="number"
+        android:hint="Amount"
+        android:layout_width="match_parent"
+        android:layout_height="50dp" />
+
+    <EditText
+        android:id="@+id/pin"
+        android:inputType="number"
+        android:hint="Pin"
+        android:layout_width="match_parent"
+        android:layout_height="50dp" />
+
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/sendBtn"
+            android:background="@color/colorPrimary"
+            android:textColor="@color/colorWhite"
+            android:text="Send"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/cancelBtn"
+            android:layout_marginLeft="10dp"
+            android:text="Cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+
+
+</LinearLayout>
